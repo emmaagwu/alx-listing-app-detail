@@ -1,4 +1,5 @@
 export interface PropertyProps {
+  id?: string
   name: string
   address: {
     state: string
@@ -13,6 +14,7 @@ export interface PropertyProps {
     shower: string
     occupants: string
   }
+  description?: string
   image: string
   discount?: string // Optional, as not all properties may have a discount
 }

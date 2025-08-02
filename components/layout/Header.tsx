@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Search, User, Calendar} from 'lucide-react';
+import { usePathname } from 'next/navigation';
 // import { Search, User, Calendar, MapPin, Users } from 'lucide-react';
 
 interface AccommodationType {
@@ -19,6 +20,8 @@ const Header: React.FC = () => {
     checkOut: '',
     people: ''
   });
+  const pathname = usePathname();
+  console.log('Current Pathname:', pathname);
 
   // Mock accommodation types - replace icons with your actual icon components
   const accommodationTypes: AccommodationType[] = [
@@ -173,46 +176,47 @@ const Header: React.FC = () => {
       </div>
 
       {/* Third Layer - Accommodation Types */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          {/* Desktop - Show all icons */}
-          <div className="hidden lg:flex justify-center items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} >
-            {accommodationTypes.map((type) => (
-              <button
-                key={type.id}
-                className="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors group"
-              >
-                <div className="text-2xl group-hover:scale-110 transition-transform">
-                  {type.icon}
-                </div>
-                <span className="text-xs text-gray-600 group-hover:text-gray-800">
-                  {type.name}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* Tablet & Mobile - Horizontal scroll */}
-          <div className="lg:hidden">
-            <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      { !pathname?.includes('/property/') &&
+        <div className="bg-white border-b border-gray-200">
+          <div className="container mx-auto px-4 py-4">
+            {/* Desktop - Show all icons */}
+            <div className="hidden lg:flex justify-center items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} >
               {accommodationTypes.map((type) => (
                 <button
                   key={type.id}
-                  className="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors group flex-shrink-0"
+                  className="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors group"
                 >
                   <div className="text-2xl group-hover:scale-110 transition-transform">
                     {type.icon}
                   </div>
-                  <span className="text-xs text-gray-600 group-hover:text-gray-800 whitespace-nowrap">
+                  <span className="text-xs text-gray-600 group-hover:text-gray-800">
                     {type.name}
                   </span>
                 </button>
               ))}
             </div>
+
+            {/* Tablet & Mobile - Horizontal scroll */}
+            <div className="lg:hidden">
+              <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                {accommodationTypes.map((type) => (
+                  <button
+                    key={type.id}
+                    className="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors group flex-shrink-0"
+                  >
+                    <div className="text-2xl group-hover:scale-110 transition-transform">
+                      {type.icon}
+                    </div>
+                    <span className="text-xs text-gray-600 group-hover:text-gray-800 whitespace-nowrap">
+                      {type.name}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
+      }
       {/* Overlay to close user menu */}
       {isUserMenuOpen && (
         <div

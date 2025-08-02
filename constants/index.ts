@@ -2,6 +2,7 @@ import { PropertyProps } from '@/interfaces'
 
 export const PROPERTYLISTINGSAMPLE: PropertyProps []  =  [
   {
+    id: "1",
     name: "Villa Ocean Breeze",
     address: {
       state: "Seminyak",
@@ -16,7 +17,7 @@ export const PROPERTYLISTINGSAMPLE: PropertyProps []  =  [
       shower: "3",
       occupants: "4-6"
     },
-    image: "https://example.com/image1.jpg",
+    image: "/property1.png",
     discount: ""
   },
   {
